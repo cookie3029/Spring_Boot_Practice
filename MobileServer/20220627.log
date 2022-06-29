@@ -1,0 +1,9 @@
+192.168.55.139:POST:/member/login
+192.168.55.139:GET:/logininfo/location
+192.168.55.139:POST:/member/login
+192.168.55.139:GET:/logininfo/location
+192.168.55.139:GET:/item/updatedate
+192.168.55.139:GET:/item/updatedate
+192.168.55.139:GET:/item/updatedate
+192.168.55.139:GET:/item/updatedate
+192.168.55.139:GET:/item/updatedate

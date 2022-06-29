@@ -1,0 +1,53 @@
+# 서버 실행 포트 정보
+server:
+  port: 80
+  
+# 데이터 베이스 접속 정보
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/paori?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: kabigon
+    password: jjansu88
+   
+# 데이터베이스 사용 옵션 정보[1]
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+# Live Reload
+  devtools:
+    livereload:
+      enabled: true
+   
+  thymeleaf:
+    cache: false
+    
+# 파일 업로드 관련 설정 추가
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 30MB
+      location: C:\\Users\\notep\\Documents\\DataRepository
+
+# 환경의 변화가 생겼을 때 수정할 정적 상수를 속성으로 생성
+com:
+  paori:
+    upload:
+      path: C:\\Users\\notep\\Documents\\DataRepository
+      
+# 데이터베이스 사용 옵션 정보[2]
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{layout/basement::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+		<h1 class="mt4">메모 상세 보기</h1>
+		
+		<div class="form-group">
+			<label>글 번호</label>
+			<input type="text" class="form-control" name="gno"
+				th:value="${dto.gno}" id="gno" readOnly />
+		</div>
+		<div class="form-group">
+			<label>제목</label>
+			<input type="text" class="form-control" name="title"
+				th:value="${dto.title}" readOnly />
+		</div>
+		<div class="form-group">
+			<label>내용</label>
+			<textarea class="form-control" rows="5" name="content" readOnly>[[${dto.content}]]</textarea>
+		</div>
+		<div class="form-group">
+			<label>작성자</label>
+			<input type="text" class="form-control" name="writer"
+				th:value="${dto.writer}" readOnly />
+		</div>
+		<div class="form-group">
+			<label>작성 시간</label>
+			<input type="text" class="form-control" name="regDate"
+				th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:SS')}" readOnly />
+		</div>
+		<div class="form-group">
+			<label>수정 시간</label>
+			<input type="text" class="form-control" name="modDate"
+				th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:SS')}" readOnly />
+		</div>
+		<a th:href="@{/memo/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}">
+			<button type="button" class="btn btn-success">목록</button>
+		</a>
+		<a th:href="@{/memo/modify(gno=${dto.gno}, page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}">
+			<button type="button" class="btn btn-warning">수정</button>
+		</a>
+		<button type="button" class="btn btn-danger">삭제</button>
+		<script>
+			$(".btn-danger").click(function() {
+				if(!confirm("정말로 삭제하시겠습니까?")) {
+					return;
+				}
+				
+				var request = new XMLHttpRequest();
+				var url = "/memo/remove";
+				var params = 'gno=' + document.getElementById('gno').value;
+								
+				request.open('POST', url, true);
+				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				request.send(params);
+				
+				request.addEventListener('load', () => {
+					alert("삭제 완료");
+					location.href='/memo/list';
+				});
+			});
+		</script>
+	</th:block>
+</th:block>
+</html>
