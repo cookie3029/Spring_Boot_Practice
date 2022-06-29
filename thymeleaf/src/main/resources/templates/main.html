@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf</title>
+</head>
+<body>
+	<h1>Thymeleaf 출력</h1>
+	<h3>이름 : [[${name}]]</h3>
+	
+	<h4>별명 : [[${person.nickname}]]</h4>
+	
+	<ul>
+		<!--  -->
+		<li th:each = "vo, state : ${list}" >
+			<a href="@{/exview/}">[[${vo.name}]]</a>
+			<a href="@{/exview(num=${vo.num})}">[[${vo.name}]]</a>
+			<a href="@{/exview/{num}(num=${vo.num})}">[[${vo.name}]]</a>
+		</li>
+	</ul>
+</body>
+</html>
